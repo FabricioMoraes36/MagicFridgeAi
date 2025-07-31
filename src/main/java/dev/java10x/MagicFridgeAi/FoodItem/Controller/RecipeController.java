@@ -30,8 +30,11 @@ public class RecipeController {
 
     @GetMapping("/gerarReceita")
     public Mono<ResponseEntity<String>> generateRecipe(){
+        //no metodo generateRecipe la do service passamos uma List como paramentro e aqui no controller usaremos essa,a ingredientes
         List<FoodItem> ingredientes = service.listar();
 
+        //aqui chamamos o metodo usando a injeção de dependencias que criamos la em cima junto com a do chatgptservice
+        //e passamos a nossa list como paramentro
         return chatgptService.generateRecipe(ingredientes)
                 .map(recipe -> ResponseEntity.ok(recipe))
                 //se estiver vazio vai retonar o noContent();

@@ -36,8 +36,10 @@ public class ChatgptService {
         }'
     */
 
+    //aqui passamos uma list como paramentro para que os itens do nosso db sejam usados no metodo quando ele for chamado la no controller
     public Mono<String> generateRecipe(List<FoodItem>foodItems) {
 
+        //Aqui criamos a variavel ingredientes para que o nosso prompt use ela e usamos o map tambem para passar a formatação que queremos
         String ingredientes = foodItems.stream()
                 .map(item -> String.format("%s (%s) - Quantidade: %d, Validade: %s",
                         item.getNome(),item.getCategoria(),item.getQuantidade(),item.getValidade()))
